@@ -1,7 +1,7 @@
 import sys
 import json
 
-JSONpath = r'D:\\Coding\\UnblockedGamesIndex\\index.json'
+JSONpath = r''
 
 def read_index():
     try:
@@ -32,7 +32,7 @@ class tokenDictionary:
     STR = "STRING"
     INT = "INTEGER"
     KEY = "KEYWORD"
-    keywords = ["ADD","EXIT","DUMP","FIND","SEARCH"]
+    keywords = ["ADD","EXIT","DUMP","FIND","SEARCH","HELP"]
     def isKeyword(self, key: str):
         return key in self.keywords
 
@@ -86,7 +86,7 @@ def search(query: str):
     found = []
     for x in range(len(data)):
         keys = list(data.keys())
-        if query in data[keys[x]]:
+        if query in keys[x] or query in data[keys[x]]:
             print(f"{keys[x]} | {data[keys[x]]}")
             found.append(data[keys[x]])
     return found
@@ -116,6 +116,8 @@ def interpret(tokenList):
             if(token.value == "ADD"):
                 if tokenList[curIndex+1].token == dictionary.STR and tokenList[curIndex+2].token == dictionary.STR:
                     add_entry(tokenList[curIndex+1].value,tokenList[curIndex+2].value)
+            if(token.value == "HELP"):
+                print("This literally has a README.md")
 
         curIndex+=1
 def initialize():
