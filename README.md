@@ -35,5 +35,8 @@ Dumps all the JSON information to the CLI.
 ### ADD <name: string> <value: string>
 Adds an entry to the specified JSON file. Eg. ```ADD "name" "value"```
 
+### HELP
+Outputs some help stuff or smth.
+
 ### EXIT
 Exits out of the program.
