@@ -1,5 +1,6 @@
 import sys
 import json
+import os
 
 JSONpath = r''
 
@@ -35,6 +36,12 @@ class tokenDictionary:
     keywords = ["ADD","EXIT","DUMP","FIND","SEARCH","HELP"]
     def isKeyword(self, key: str):
         return key in self.keywords
+
+def dump():
+    data = read_index()
+    for x in range(len(data)):
+        keys = list(data.keys())
+        print(f"{keys[x]} | {data[keys[x]]}")
 
 def tokenize(toTokenize: str):
     dictionary = tokenDictionary()
@@ -103,7 +110,7 @@ def interpret(tokenList):
                 print("Exiting JSON Console Interpreter")
                 sys.exit(0)
             if(token.value == "DUMP"):
-                print(read_index())
+                dump()
             if(token.value == "FIND"):
                 if tokenList[curIndex + 1].token == dictionary.STR:
                     if not tokenList[curIndex+1].value in read_index():
@@ -121,6 +128,7 @@ def interpret(tokenList):
 
         curIndex+=1
 def initialize():
+    os.system('cls' if os.name == 'nt' else 'clear')
     args = sys.argv
     print("JSON Console Interpreter")
     print("Initializing...")
